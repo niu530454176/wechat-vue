@@ -21,6 +21,7 @@
           <!--<div class="time" v-html="getTime(item.kfPublish)"></div>-->
         </div>
       </div>
+      <div class="message-tips" v-if="messageTips">课程已全部加载</div>
     </div>
   </div>
 </template>
@@ -38,6 +39,8 @@
         type: '',
         columnList: [],
         disabled: false,
+        isFirstGetItem: true,
+        messageTips: false,
       }
     },
     created: function () {
@@ -65,12 +68,16 @@
             _this.columnList.push(json.meta.rows[i]);
           }
           if (!json.meta.rows.length) {
+            this.messageTips = true;
             this.pageIndex = index - 1;
           } else {
             _this.disabled = false;
           }
           let url = this.columnList[0].kfVideo;
-          _this.initPlayer(url);
+          if (this.isFirstGetItem) {
+            _this.initPlayer(url);
+            this.isFirstGetItem = false;
+          }
         })
       },
       getImg (img) {
@@ -117,14 +124,27 @@
   @import "../Home/base.less";
   #popularColumn {
     background-color: #fdfdfd;
-    .itemW;
+    width: 100%;
     height:11.63rem;
   .player-room{
     width:100%;
     height: 5.2rem;
-    background-color: #333;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    padding-bottom: .2rem;
+  }
+  .message-tips {
+    width: 100%;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: .34rem;
   }
   .col-room{
+    margin-top: 5.2rem;
+  .itemW;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

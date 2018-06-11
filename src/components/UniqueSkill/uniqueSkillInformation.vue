@@ -34,7 +34,8 @@
       getTargetUrl () {
         let sid = this.$route.query.sid,
             glid = this.$route.query.glid;
-        let url = "http://cszixun.cctvcs.com.cn/zixunserver/index.php/news/contentcctvjy/" + glid + "|" + sid;
+        let url = "http://zixun.boxtougu.com/zixunserver/index.php/news/contentcctvjy/" + glid + "|" + sid;
+        console.log(url);
         fetch(url, { // 在URL中写上传递的参数
           method: 'GET'
         }).then((res)=>{

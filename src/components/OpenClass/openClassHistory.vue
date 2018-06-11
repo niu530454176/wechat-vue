@@ -149,11 +149,14 @@
     width:100%;
     height: 5.2rem;
     background-color: #333;
+    position: fixed;
+    top: 0;
+    z-index: 99;
   }
   .col-room{
     display: flex;
     width: 94%;
-    margin: 0 auto;
+    margin: 5.2rem auto 0;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

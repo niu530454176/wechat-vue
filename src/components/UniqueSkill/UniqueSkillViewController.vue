@@ -14,28 +14,7 @@
             <div class="rect4"></div>
             <div class="rect5"></div>
           </div>
-          <img style="display: none;" src="./informationImages/random-1.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-2.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-3.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-4.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-5.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-6.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-7.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-8.jpg" alt="">
-          <img style="display: none;" src="./informationImages/random-9.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-10.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-11.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-12.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-13.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-14.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-15.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-16.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-17.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-18.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-19.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-20.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-21.jpg" alt="">
-          <img style="display: none;"  src="./informationImages/random-22.jpg" alt="">
+          <img :src="item.randomImg.url" alt="">
         </div>
         <div class="texts">
           <div class="header">{{ item.title }}</div>
@@ -67,7 +46,31 @@
         SID: '',
         disabled: false,
         count: 1, // 记录刷新的次数, 调试使用
-        liatI: 0,
+        randomImgData:[
+          {url:require('./informationImages/random-0.jpg')},
+          {url:require('./informationImages/random-1.jpg')},
+          {url:require('./informationImages/random-2.jpg')},
+          {url:require('./informationImages/random-3.jpg')},
+          {url:require('./informationImages/random-4.jpg')},
+          {url:require('./informationImages/random-5.jpg')},
+          {url:require('./informationImages/random-6.jpg')},
+          {url:require('./informationImages/random-7.jpg')},
+          {url:require('./informationImages/random-8.jpg')},
+          {url:require('./informationImages/random-9.jpg')},
+          {url:require('./informationImages/random-10.jpg')},
+          {url:require('./informationImages/random-11.jpg')},
+          {url:require('./informationImages/random-12.jpg')},
+          {url:require('./informationImages/random-13.jpg')},
+          {url:require('./informationImages/random-14.jpg')},
+          {url:require('./informationImages/random-15.jpg')},
+          {url:require('./informationImages/random-16.jpg')},
+          {url:require('./informationImages/random-17.jpg')},
+          {url:require('./informationImages/random-18.jpg')},
+          {url:require('./informationImages/random-19.jpg')},
+          {url:require('./informationImages/random-20.jpg')},
+          {url:require('./informationImages/random-21.jpg')},
+          {url:require('./informationImages/random-22.jpg')}
+          ]
       }
     },
     methods: {
@@ -85,15 +88,12 @@
         .then((res)=>{
           res = res.substring(1,res.length - 1);
           for (let i = 0;i < JSON.parse(res).list.length; i++) {
-            this.disabled = false;
-//            let html = '<img src="./informationImages/random-' + parseInt(Math.random() * 23) + '.png" alt="">';
-//            JSON.parse(res).list[i][html] = html;
-            let testArr = JSON.parse(res).list[i];
-//            testArr.codelist = html;
-            this.test.push(testArr);
-            document.getElementsByClassName('image')[this.liatI].getElementsByTagName('img')[parseInt(Math.random() * 23)].style.display = 'block';
-            this.liatI++;
+            let random = parseInt(Math.random() * 23);
+            let listItem = JSON.parse(res).list[i];
+            listItem.randomImg = this.randomImgData[random];
+            this.test.push(listItem);
           }
+          this.disabled = false;
         })
       },
       changeText (content) {
